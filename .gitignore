@@ -1,0 +1,6 @@
+# Para rama de desarrollo
+node_modules
+vendor
+includes/.env
+composer.lock
+package-lock.json
