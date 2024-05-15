@@ -8,7 +8,7 @@ use Controllers\holaMundoController;
 $router = new Router();
 
 // Pagina Hola Mundo
-$router->get('/hola-mundo',[holaMundoController::class, 'holaMundo']);
+$router->get('/',[holaMundoController::class, 'holaMundo']);
 
 
 

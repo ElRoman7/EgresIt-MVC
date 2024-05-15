@@ -1,0 +1,35 @@
+@use '../base/variables' as v;
+
+.header{
+    height: 7rem;
+    background-color: v.$azulf;
+
+    .logo-header{
+        width: 8rem;
+    }
+    .barra{
+        display: flex;
+        align-items: center;
+    }
+    .navegacion{
+
+        a{
+            font-size: 1.8rem;
+            color: v.$blancog;
+            margin-left: 1.5rem;
+            &:hover{
+                color: v.$blanco;
+                transition: color 0.3s ease;
+            }
+        }
+        
+    }
+
+
+    
+}
+.contenido-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
