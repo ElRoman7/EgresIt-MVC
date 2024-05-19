@@ -1,8 +1,11 @@
 @use '../base/variables' as v;
 
 .header{
+    
     height: 7rem;
     background-color: v.$azulf;
+    display: flex;
+    align-items: center;
 
     .logo-header{
         width: 8rem;

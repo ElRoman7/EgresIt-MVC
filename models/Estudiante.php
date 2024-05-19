@@ -4,7 +4,9 @@ namespace Model;
 
 class Estudiante extends ActiveRecord{
     protected static $tabla = 'estudiantes';
-    protected static $columnasDB = ['codigo_estudiante',
+    protected static $columnasDB = [
+                                    'id',
+                                    'codigo_estudiante',
                                     'nombre',
                                     'email',
                                     'carrera',
@@ -14,6 +16,7 @@ class Estudiante extends ActiveRecord{
                                     'foto_path',
                                     'contraseña'];
     
+    public $id;
     public $codigo_estudiante;
     public $nombre;
     public $email;
@@ -26,15 +29,16 @@ class Estudiante extends ActiveRecord{
 
     public function __construct($args = [])
     {
-        $this->id = $args['codigo_estudiante'] ?? null;
-        $this->id = $args['nombre'] ?? '';
-        $this->id = $args['email'] ?? '';
-        $this->id = $args['carrera'] ?? '';
-        $this->id = $args['telefono'] ?? '';
-        $this->id = $args['nivel_estudios'] ?? '';
-        $this->id = $args['cv_pdf_path'] ?? '';
-        $this->id = $args['foto_path'] ?? '';
-        $this->id = $args['contraseña'] ?? '';
+        $this->id =                 $args['id'] ?? null;
+        $this->codigo_estudiante =  $args['codigo_estudiante'] ?? null;
+        $this->nombre =             $args['nombre'] ?? '';
+        $this->email =              $args['email'] ?? '';
+        $this->carrera =            $args['carrera'] ?? '';
+        $this->telefono =           $args['telefono'] ?? '';
+        $this->nivel_estudios =     $args['nivel_estudios'] ?? '';
+        $this->cv_pdf_path =        $args['cv_pdf_path'] ?? 'abc';
+        $this->foto_path =          $args['foto_path'] ?? 'abc';
+        $this->contraseña =         $args['contraseña'] ?? '';
     }
 
     public function validarNuevaCuenta(){
@@ -65,5 +69,37 @@ class Estudiante extends ActiveRecord{
 
         return self::$alertas;
 
+    }
+
+    public function validarLogin(){
+        if(!$this->email){
+            self::$alertas['error'][]= 'El email es Obligatorio';
+        }
+        if(!$this->contraseña){
+            self::$alertas['error'][]= 'La contraseña es Obligatoria';
+        }
+        return self::$alertas;
+    }
+
+    public function exiteUsuario(){
+        $query = "SELECT * FROM ". self::$tabla ." WHERE email = '". $this->email . "' LIMIT 1";
+        $resultado = self::$db->query($query);
+        if($resultado->num_rows){
+            self::$alertas['error'][] = "El correo ya ha sido registrado";
+        }
+        return $resultado;
+    }
+
+    public function hashearContraseña(){
+        $this->contraseña = password_hash($this->contraseña, PASSWORD_BCRYPT);
+    }
+
+    public function comprobarPasswordAndVerificado($contraseña){
+        $resultado = password_verify($contraseña,$this->contraseña);
+        if(!$resultado){
+            self::$alertas['error'][]= 'Password Incorrecto';
+        }else{
+            return true;
+        }
     }
 }

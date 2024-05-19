@@ -1,0 +1,35 @@
+@use 'base/variables' as v;
+
+
+.formulario{
+    margin-top: 2rem;
+    max-width: 1300px; /* Establecer un ancho máximo para el formulario */
+    margin-left: auto; /* Centrar el formulario horizontalmente */
+    margin-right: auto; /* Centrar el formulario horizontalmente */
+    padding: 20px; /* Reducir el padding del formulario */
+    border: 1px solid #ccc; /* Agregar un borde al formulario */
+    border-radius: 8px; /* Agregar bordes redondeados al formulario */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Agregar una sombra al formulario */
+}
+.campo{
+    display: flex;
+    margin-bottom: 2rem;
+    align-items: center;
+
+    label{
+        flex: 0 0 10rem;
+    }
+    input {
+        flex: 1;
+        border: 2px solid #ccc; /* Establece un borde sólido de 2px */
+        border-radius: 8px; /* Agrega bordes redondeados */
+        padding: 10px; /* Aumenta el relleno para que el texto no esté demasiado cerca del borde */
+        background-color: #f9f9f9; /* Cambia el color de fondo */
+        transition: border-color 0.3s ease; /* Agrega una transición suave para el cambio de color de borde */
+    }
+    
+    input:focus {
+        border-color: #007bff; /* Cambia el color del borde cuando el input está enfocado */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Agrega una sombra al input enfocado */
+    }
+}

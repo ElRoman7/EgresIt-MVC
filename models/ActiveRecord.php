@@ -102,6 +102,13 @@ class ActiveRecord {
         return $resultado;
     }
 
+    // !Get Varios Registros
+    public static function getNoLimit($columna, $valor) {
+        $query = "SELECT * FROM " . static::$tabla  ." WHERE  $columna = '$valor'";
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
     // Todos los registros
     public static function all() {
         $query = "SELECT * FROM " . static::$tabla;
@@ -185,5 +192,28 @@ class ActiveRecord {
         $resultado = self::$db->query($query);
         return $resultado;
     }
+
+    // Subir Imagen
+    public function setImage($imagen){
+        // Elimina la imagen previa si es que estamos actualizando
+        if(!is_null($this->id)){
+            // Comprobar si existe el archivo
+            $this->borrarImagen();
+        }
+        if($imagen){
+            $this->imagen = $imagen;
+        }
+    }
+
+    // !Eliminar Imagen o Archivo
+    public function borrarImagen(){
+        // Elimina el archivo
+        $exitsteArchivo = file_exists(CARPETA_IMAGENES.$this->imagen);
+        if($exitsteArchivo){
+            unlink(CARPETA_IMAGENES.$this->imagen);
+        }
+        
+    }
+
 
 }

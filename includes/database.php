@@ -1,6 +1,6 @@
 <?php
 
-$db = mysqli_connect('localhost', 'root', 'Rg2003sA?', 'egresIt');
+$db = mysqli_connect('localhost', 'root', 'Rg2003sA?', 'egresit');
 
 
 if (!$db) {
