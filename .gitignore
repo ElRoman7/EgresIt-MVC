@@ -4,3 +4,4 @@ vendor
 includes/.env
 composer.lock
 package-lock.json
+includes/database.php
